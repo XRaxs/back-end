@@ -12,8 +12,8 @@ const ticketRoutes = require("./routes/ticketRoutes"); // Import ticket routes
 dotenv.config(); // Mengambil variabel lingkungan dari file .env
 
 const server = Hapi.server({
-  port: process.env.PORT || 5000,
-  host: "localhost",
+  port: process.env.PORT || 5000,  // Gunakan process.env.PORT dari Vercel
+  host: "0.0.0.0",  // Ganti localhost dengan 0.0.0.0
 });
 
 // Fungsi async untuk menginisialisasi server
