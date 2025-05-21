@@ -31,7 +31,7 @@ connectDB();
 
 const server = Hapi.server({
   port: process.env.PORT,  // Gunakan process.env.PORT dari Vercel
-  host: "0.0.0.0",  // Ganti localhost dengan 0.0.0.0
+  host: "localhost",  // Ganti localhost dengan 0.0.0.0
 });
 
 // Fungsi async untuk menginisialisasi server
