@@ -34,8 +34,8 @@ const connectDB = async () => {
 connectDB();
 
 const server = Hapi.server({
-  port: process.env.PORT || 5000,  // Gunakan process.env.PORT dari Vercel atau fallback ke 5000
-  host: 'localhost',  // Untuk mengizinkan akses dari luar
+  port: process.env.PORT,  // Gunakan process.env.PORT dari Vercel atau fallback ke 5000
+  host: 'localhost',
   routes: {
     cors: {
       origin: ['*'],  // Mengizinkan semua asal, bisa ditentukan lebih spesifik seperti ['http://localhost:3000']
