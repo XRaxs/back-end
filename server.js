@@ -18,10 +18,7 @@ const connectDB = async () => {
     if (!uri) {
       throw new Error("MongoDB URI is not defined in .env file");
     }
-    await mongoose.connect(uri, { // Pastikan variabel lingkungan ini sudah benar
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(uri); // Koneksi tanpa opsi deprecated
     console.log("MongoDB Connected...");
   } catch (err) {
     console.error("MongoDB Connection Error: ", err.message);
