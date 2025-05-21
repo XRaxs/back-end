@@ -6,8 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "/9(.*)",
-      "dest": "server.js"
+      "src": "/(.*)"
     }
   ]
 }
