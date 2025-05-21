@@ -5,14 +5,35 @@ const Inert = require("@hapi/inert"); // Mengimpor plugin Inert untuk file stati
 const wishlistRoutes = require("./routes/wishlistRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
-const adminRoutes = require("./routes/AdminRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes"); // Import user routes
 const ticketRoutes = require("./routes/ticketRoutes"); // Import ticket routes
 
 dotenv.config(); // Mengambil variabel lingkungan dari file .env
 
+// Koneksi ke MongoDB
+const connectDB = async () => {
+  try {
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+      throw new Error("MongoDB URI is not defined in .env file");
+    }
+    await mongoose.connect(uri, { // Pastikan variabel lingkungan ini sudah benar
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected...");
+  } catch (err) {
+    console.error("MongoDB Connection Error: ", err.message);
+    process.exit(1); // Keluar jika koneksi gagal
+  }
+};
+
+// Menyambungkan ke MongoDB
+connectDB();
+
 const server = Hapi.server({
-  port: process.env.PORT || 5000,
+  port: process.env.PORT || 5000, // Ambil port dari variabel lingkungan atau default ke 5000
   host: "localhost",
 });
 
@@ -24,22 +45,11 @@ const init = async () => {
   // Menyajikan file statis dari folder "public"
   server.route({
     method: "GET",
-    path: "/{param*}",
-    handler: {
-      directory: {
-        path: "public", // Folder tempat file HTML dan CSS berada
-        index: ["adminDashboard.html"], // Menyajikan file adminDashboard.html sebagai index
-      },
-    },
+    path: "/",
+    handler: (request, h) => {
+      return 'Server is running!'; // Testing root route
+    }
   });
-
-  // Koneksi ke MongoDB
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-  }
 
   // Menggunakan routes yang sudah didefinisikan
   server.route(wishlistRoutes); // Rute wishlist
@@ -47,7 +57,7 @@ const init = async () => {
   server.route(destinationRoutes); // Rute destinasi
   server.route(adminRoutes); // Rute admin
   server.route(userRoutes); // Rute user
-  server.route(ticketRoutes); // Rute tiket (tambah di sini)
+  server.route(ticketRoutes); // Rute tiket
 
   // Menjalankan server
   await server.start();
