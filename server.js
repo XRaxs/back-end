@@ -30,7 +30,7 @@ const connectDB = async () => {
 connectDB();
 
 const server = Hapi.server({
-  port: process.env.PORT || 5000,  // Gunakan process.env.PORT dari Vercel
+  port: process.env.PORT,  // Gunakan process.env.PORT dari Vercel
   host: "0.0.0.0",  // Ganti localhost dengan 0.0.0.0
 });
 
