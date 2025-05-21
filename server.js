@@ -5,7 +5,7 @@ const Inert = require("@hapi/inert"); // Mengimpor plugin Inert untuk file stati
 const wishlistRoutes = require("./routes/wishlistRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
-const adminRoutes = require("./routes/AdminRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes"); // Import user routes
 const ticketRoutes = require("./routes/ticketRoutes"); // Import ticket routes
 
